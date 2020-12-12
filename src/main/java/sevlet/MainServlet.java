@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 @ServletSecurity
@@ -15,44 +16,43 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
             throws javax.servlet.ServletException, IOException {
 
-        
+        HttpSession session = request.getSession();
 
+        if (session.isNew()) {
+            request.setAttribute("sessionVal", "this is a new session");
 
-        MainServlet mainServlet = new MainServlet();
-
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-
-            session = request.getSession();
-
-            System.out.println("нет");
+            System.out.println("new");
         } else {
+            request.setAttribute("sessionVal", "Welcome Back!");
 
-            System.out.println("Да");
+            System.out.println("old");
         }
 
-
-
+        destroy(request, response, session);
     }
 
-    public class SessionListener implements HttpSessionListener {
-        private int sessionCount = 0;
+    private void destroy(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, HttpSession session) throws IOException {
+        PrintWriter writer = response.getWriter();
 
-        public void sessionCreated(HttpSessionEvent event) {
-            synchronized (this) {
-                sessionCount++;
-            }
+        String name = request.getParameter("name");
 
-            System.out.println("Session Created: " + event.getSession().getId());
-            System.out.println("Total Sessions: " + sessionCount);
+        if (name.equals("logout")){
+
+            session.invalidate();
         }
 
-        public void sessionDestroyed(HttpSessionEvent event) {
-            synchronized (this) {
-                sessionCount--;
-            }
-            System.out.println("Session Destroyed: " + event.getSession().getId());
-            System.out.println("Total Sessions: " + sessionCount);
+        try {
+            writer.println("<h2>Name: " + name + "; Age: " + "</h2>");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
+
+
+
+
+
+
+
+
