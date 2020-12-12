@@ -15,7 +15,7 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
             throws javax.servlet.ServletException, IOException {
-
+        PrintWriter writer = response.getWriter();
         HttpSession session = request.getSession();
 
         if (session.isNew()) {
@@ -25,13 +25,15 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
         } else {
             request.setAttribute("sessionVal", "Welcome Back!");
 
-            System.out.println("old");
+
+            writer.println("<h2>" + " Access denied "+ "</h2>");
         }
 
         destroy(request, response, session);
     }
 
     private void destroy(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, HttpSession session) throws IOException {
+
         PrintWriter writer = response.getWriter();
 
         String name = request.getParameter("name");
