@@ -1,4 +1,4 @@
-<%--
+<%@ page import="sevlet.MainServlet" %><%--
   Created by IntelliJ IDEA.
   User: Nikolai
   Date: 04.12.2020
@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello </h1>
+<p>${name}</p>
+
 </body>
 </html>
