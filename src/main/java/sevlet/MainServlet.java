@@ -28,6 +28,11 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
     }
 
 
+    public void test(String s){
+
+    }
+
+
 
 }
 
