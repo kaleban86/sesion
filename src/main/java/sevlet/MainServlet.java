@@ -1,9 +1,12 @@
 package sevlet;
 
 import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@ServletSecurity
+
+@WebServlet("/test")
 public class MainServlet extends javax.servlet.http.HttpServlet {
 
 
@@ -11,14 +14,13 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
             throws javax.servlet.ServletException, IOException {
 
 
-        int s = 1;
-        int d = 0;
-        if (s > d) {
+        String session = req.getLocalAddr();
+
+        System.out.println("Ip " + session);
 
 
 
 
-        }
     }
 
 
