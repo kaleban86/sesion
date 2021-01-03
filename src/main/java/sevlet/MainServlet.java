@@ -1,8 +1,6 @@
 package sevlet;
 
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
